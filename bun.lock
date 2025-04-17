@@ -4,23 +4,23 @@
     "": {
       "name": "3d-editor",
       "dependencies": {
-        "@tailwindcss/vite": "^4.1.4",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0",
-        "tailwindcss": "^4.1.4",
+        "@tailwindcss/vite": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "tailwindcss": "latest",
       },
       "devDependencies": {
-        "@eslint/js": "^9.22.0",
-        "@types/react": "^19.0.10",
-        "@types/react-dom": "^19.0.4",
-        "@vitejs/plugin-react": "^4.3.4",
-        "eslint": "^9.22.0",
-        "eslint-plugin-react-hooks": "^5.2.0",
-        "eslint-plugin-react-refresh": "^0.4.19",
-        "globals": "^16.0.0",
-        "typescript": "~5.7.2",
-        "typescript-eslint": "^8.26.1",
-        "vite": "^6.3.1",
+        "@eslint/js": "latest",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "@vitejs/plugin-react": "latest",
+        "eslint": "latest",
+        "eslint-plugin-react-hooks": "latest",
+        "eslint-plugin-react-refresh": "latest",
+        "globals": "latest",
+        "typescript": "latest",
+        "typescript-eslint": "latest",
+        "vite": "latest",
       },
     },
   },
@@ -507,7 +507,7 @@
 
     "type-check": ["type-check@0.4.0", "", { "dependencies": { "prelude-ls": "^1.2.1" } }, "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="],
 
-    "typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+    "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
     "typescript-eslint": ["typescript-eslint@8.30.1", "", { "dependencies": { "@typescript-eslint/eslint-plugin": "8.30.1", "@typescript-eslint/parser": "8.30.1", "@typescript-eslint/utils": "8.30.1" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0", "typescript": ">=4.8.4 <5.9.0" } }, "sha512-D7lC0kcehVH7Mb26MRQi64LMyRJsj3dToJxM1+JVTl53DQSV5/7oUGWQLcKl1C1KnoVHxMMU2FNQMffr7F3Row=="],
 
