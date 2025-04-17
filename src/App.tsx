@@ -1,14 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { DropFileOverlay } from "./drop-file-overlay.tsx";
-// Type for file with its URL
-interface FileWithUrl {
-  file: File;
-  id: string;
-}
 
 function App() {
-  const [files, setFiles] = useState<FileWithUrl[]>([]);
-  const fileCounter = useRef(0);
+  const [files, setFiles] = useState<File[]>([]);
 
   // Handle file drops
   const handleFileDrop = useCallback((droppedFiles: File[]) => {
@@ -16,10 +10,7 @@ function App() {
 
     setFiles((prevFiles) => [
       ...prevFiles,
-      ...droppedFiles.map((file) => ({
-        file,
-        id: `file-${fileCounter.current++}-${file.name}`, // Generate unique ID
-      })),
+      ...droppedFiles,
     ]);
   }, []);
   return (
