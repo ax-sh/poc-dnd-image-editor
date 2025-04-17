@@ -24,8 +24,13 @@ function App() {
   }, []);
   return (
     <section className={"h-dvh"}>
-      <DropFileOverlay onFileDrop={handleFileDrop} disableClickOpenFileDialog={!!files.length}>
-        {files.length && JSON.stringify(files)}
+      <DropFileOverlay
+        onFileDrop={handleFileDrop}
+        disableClickOpenFileDialog={!!files.length}
+      >
+        <pre>
+           {JSON.stringify(files,null,5)}
+        </pre>
       </DropFileOverlay>
     </section>
   );
