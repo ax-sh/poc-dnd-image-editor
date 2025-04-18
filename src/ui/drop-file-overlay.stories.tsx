@@ -44,20 +44,28 @@ export const Primary: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    console.log();
 
-    // // 👇 Simulate interactions with the component
-    // await userEvent.type(canvas.getByTestId('email'), 'email@provider.com');
-    //
-    // await userEvent.type(canvas.getByTestId('password'), 'a-random-password');
-    //
     // // See https://storybook.js.org/docs/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
-    // await userEvent.click(canvas.getByRole('button'));
-    //
-    // // 👇 Assert DOM structure
+    // await userEvent.click(canvas.queryAllByRole('input[type="file"]'));
+    // Get all elements with the role 'textbox' and name 'file-input'
+    const dndFileInput = canvas.getByTestId<HTMLInputElement>("dnd-file-input");
+    await expect(dndFileInput).toBeInTheDocument();
+
     const dragHint = canvas.getByText(
-      `Drag 'n' drop some files here, or click to select files`,
+      /Drag 'n' drop some files here, or click to select files/,
     );
+
     await expect(dragHint).toBeInTheDocument();
+    // Ensure there is at least one file input
+
+    // // Create a mock file
+    const file = new File(["hello"], "hello.png", { type: "image/png" });
+
+    // Simulate file selection
+    await userEvent.upload(dndFileInput, file);
+    // Assert that the file input has the selected file
+
+    await expect(dndFileInput.files).toHaveLength(1);
+    await expect(dndFileInput.files?.[0]).toBe(file);
   },
 };

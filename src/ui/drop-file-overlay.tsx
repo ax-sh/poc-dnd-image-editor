@@ -66,7 +66,7 @@ export function DropFileOverlay({
             "cursor-pointer",
         )}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()} data-testid="dnd-file-input" />
         {showHint && <UploadHintCard />}
       </section>
       {children}
