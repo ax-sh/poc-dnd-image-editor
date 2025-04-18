@@ -1,6 +1,6 @@
 import { useLayers } from "./use-layers.tsx";
 import { useEffect, useState } from "react";
-import { Texture } from "pixi.js";
+import { FederatedPointerEvent, Texture } from "pixi.js";
 
 export type EditorProps = { files: File[] };
 
@@ -21,12 +21,19 @@ export const Stage = ({ files }: EditorProps) => {
     });
   }, [files, addLayer]); // Re-run when files prop changes
 
+  const handlePointerOver = (event: FederatedPointerEvent) => {
+    console.log(event.target, 888);
+    setIsHover(true);
+  };
+  const handlePointerOut = (event: FederatedPointerEvent) => {
+    setIsHover(false);
+  };
+  const handleClick = (event: FederatedPointerEvent) => {
+    console.log(event)
+    setIsActive(!isActive);
+  }
   return (
-    <pixiContainer
-      onClick={(event) => setIsActive(!isActive)}
-      onPointerOver={(event) => setIsHover(true)}
-      onPointerOut={(event) => setIsHover(false)}
-    >
+    <pixiContainer>
       {/*Render all image layers*/}
       {layers.map((layer) => (
         <pixiContainer
@@ -35,6 +42,9 @@ export const Stage = ({ files }: EditorProps) => {
           y={layer.y}
           anchor={0.5}
           eventMode={"static"}
+          onClick={handleClick}
+          onPointerOver={handlePointerOver}
+          onPointerOut={handlePointerOut}
           scale={isActive ? 1 / 2 : 1 / 10}
         >
           <pixiSprite
