@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DropFileOverlay } from "./drop-file-overlay";
-import { HTMLInputTypeAttribute, useCallback, useState } from "react"; // Adjust the import path as needed
+import { useCallback, useState } from "react"; // Adjust the import path as needed
 
 // https://storybook.js.org/docs/writing-tests/component-testing
 function DropFileWrapper() {

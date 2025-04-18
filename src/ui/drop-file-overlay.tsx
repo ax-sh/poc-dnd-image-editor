@@ -62,7 +62,7 @@ export function DropFileOverlay({
         {...getRootProps()}
         className={clsx(
           "absolute inset-0",
-          disableClickOpenFileDialog &&
+          !disableClickOpenFileDialog &&
             "cursor-pointer",
         )}
       >
