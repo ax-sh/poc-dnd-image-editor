@@ -2,6 +2,7 @@ import { useApplication } from "@pixi/react";
 import { useCallback, useState } from "react";
 import { readFileAsDataURL } from "./utils.ts";
 import { Assets, Texture } from "pixi.js";
+import {useLayerStore} from "./use-layer-store.ts";
 
 interface ImageLayer {
   id: string;
@@ -13,6 +14,7 @@ interface ImageLayer {
 
 export function useLayers() {
   const { app, isInitialised } = useApplication();
+  const store = useLayerStore();
   const [layers, setLayers] = useState<ImageLayer[]>([]);
   const addLayer = useCallback(async function (file: File, index: number) {
     if (!isInitialised) return;
