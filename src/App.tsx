@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
-import { DropFileOverlay } from "./ui/drop-file-overlay.tsx";
+import { DropFileOverlay } from "./ui/dnd/drop-file-overlay.tsx";
+import Editor from "./ui/editor";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
@@ -19,9 +20,7 @@ function App() {
         onFileDrop={handleFileDrop}
         disableClickOpenFileDialog={!!files.length}
       >
-        <pre>
-           {JSON.stringify(files,null,5)}
-        </pre>
+       <Editor files={files}/>
       </DropFileOverlay>
     </section>
   );

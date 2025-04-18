@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DropFileOverlay } from "./drop-file-overlay";
+import { DropFileOverlay } from "./drop-file-overlay.tsx";
 import { useCallback, useState } from "react"; // Adjust the import path as needed
 
 // https://storybook.js.org/docs/writing-tests/component-testing
