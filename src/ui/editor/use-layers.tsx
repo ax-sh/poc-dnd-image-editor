@@ -12,9 +12,10 @@ interface ImageLayer {
 }
 
 export function useLayers() {
-  const { app } = useApplication();
+  const { app, isInitialised } = useApplication();
   const [layers, setLayers] = useState<ImageLayer[]>([]);
   const addLayer = useCallback(async function (file: File, index: number) {
+    if (!isInitialised) return;
     const url = await readFileAsDataURL(file);
     const texture = await Assets.load(url);
     const x = app.screen.width / 2 + (index * 30); // Center of screen with offset
@@ -26,12 +27,18 @@ export function useLayers() {
       y,
       zIndex: index,
     };
+    // // bg is first, its not lighted
+    // const bg = new TilingSprite({texture, width:app.screen.width, height:app.screen.height});
+    // bg.tint = 0xff8080;
+    // //
+    // app.stage.addChild(bg)
+
     setLayers((prevLayers) => {
       const updatedLayers = [...prevLayers, newLayer];
       console.log("Updated layers:", updatedLayers);
       return updatedLayers;
     });
-  }, [app.screen.height, app.screen.width]);
+  }, [isInitialised, app.screen.height, app.screen.width]);
 
   // Sorting layers by zIndex
   const sortedLayers = [...layers].sort((a, b) => a.zIndex - b.zIndex);
