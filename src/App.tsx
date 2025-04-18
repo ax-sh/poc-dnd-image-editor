@@ -20,7 +20,7 @@ function App() {
         onFileDrop={handleFileDrop}
         disableClickOpenFileDialog={!!files.length}
       >
-       <Editor files={files}/>
+        <Editor files={files} />
       </DropFileOverlay>
     </section>
   );
