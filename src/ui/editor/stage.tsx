@@ -1,8 +1,28 @@
-import { useEffect, useState } from "react";
-import { FederatedPointerEvent } from "pixi.js";
+import { useEffect, useMemo, useState } from "react";
+import { FederatedPointerEvent, TextStyle } from "pixi.js";
 import { useLayers } from "../../hooks/use-layers.ts";
 
 export type EditorProps = { files: File[] };
+
+function LayerText({ text }: { text: string }) {
+  const style = useMemo(() => {
+    return new TextStyle({
+      fontFamily: "Arial",
+      // dropShadow: {
+      //   alpha: 0.8,
+      //   angle: 2.1,
+      //   blur: 4,
+      //   color: '0x111111',
+      //   distance: 10,
+      // },
+      fill: "#ffffff",
+      // stroke: { color: '#004620', width: 12, join: 'round' },
+      fontSize: 60,
+      fontWeight: "lighter",
+    });
+  }, []);
+  return <pixiText text={text} style={style} />;
+}
 
 export const Stage = ({ files }: EditorProps) => {
   const { layers, addLayer } = useLayers();
@@ -50,7 +70,7 @@ export const Stage = ({ files }: EditorProps) => {
           <pixiSprite
             texture={layer.texture}
           />
-          <pixiText  text='SKEW IS COOL'/>
+          <LayerText text={layer.id} />
         </pixiContainer>
       ))}
     </pixiContainer>
