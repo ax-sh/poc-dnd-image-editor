@@ -1,8 +1,9 @@
-import { Application, extend, useApplication, useTick } from "@pixi/react";
-import { Assets, Container, Graphics, Sprite, Texture } from "pixi.js";
+import { Application, extend } from "@pixi/react";
+import { Container, Graphics, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLayers } from "./use-layers.tsx";
 
 // extend tells @pixi/react what Pixi.js components are available
 extend({
@@ -11,57 +12,8 @@ extend({
   Sprite,
   Viewport,
 });
-interface ImageLayer {
-  id: string;
-  texture: Texture;
-  x: number;
-  y: number;
-  zIndex: number;
-}
+
 type EditorProps = { files: File[] };
-
-// Helper function to read a file as data URL
-function readFileAsDataURL(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      resolve(reader.result as string);
-    };
-
-    reader.onerror = () => {
-      reject(new Error("Failed to read file as data URL"));
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
-
-function useLayers() {
-  const { app } = useApplication();
-  const [layers, setLayers] = useState<ImageLayer[]>([]);
-  const addLayer = useCallback(async function (file: File, index: number) {
-    const url = await readFileAsDataURL(file);
-    const texture = await Assets.load(url);
-
-    const newLayer: ImageLayer = {
-      id: `layer-${Date.now()}-${index}`,
-      texture,
-      x: app.screen.width / 2 + (index * 30), // Center of screen with offset
-      y: app.screen.height / 2 + (index * 30),
-      zIndex: index,
-    };
-    setLayers((prevLayers) => {
-      const updatedLayers = [...prevLayers, newLayer];
-      console.log("Updated layers:", updatedLayers);
-      return updatedLayers;
-    });
-  }, [app.screen.height, app.screen.width]);
-
-  // Sorting layers by zIndex
-  const sortedLayers = [...layers].sort((a, b) => a.zIndex - b.zIndex);
-  return { layers: sortedLayers, addLayer };
-}
 
 const ChildComponent = ({ files }: EditorProps) => {
   const { layers, addLayer } = useLayers();
