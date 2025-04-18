@@ -12,14 +12,19 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@react-three/drei": "^10.0.6",
+    "@react-three/fiber": "^9.1.2",
     "@tailwindcss/vite": "^4.1.4",
     "@testing-library/jest-dom": "^6.6.3",
+    "@types/three": "^0.175.0",
     "clsx": "^2.1.1",
+    "leva": "^0.10.0",
     "lucide-react": "^0.488.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-dropzone": "^14.3.8",
     "tailwindcss": "^4.1.4",
+    "three": "^0.175.0",
     "vite-plugin-qrcode": "^0.2.4"
   },
   "devDependencies": {
