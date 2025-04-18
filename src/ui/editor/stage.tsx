@@ -1,6 +1,6 @@
-import { useLayers } from "./use-layers.tsx";
 import { useEffect, useState } from "react";
-import { FederatedPointerEvent, Texture } from "pixi.js";
+import { FederatedPointerEvent } from "pixi.js";
+import { useLayers } from "../../hooks/use-layers.ts";
 
 export type EditorProps = { files: File[] };
 
@@ -29,9 +29,9 @@ export const Stage = ({ files }: EditorProps) => {
     setIsHover(false);
   };
   const handleClick = (event: FederatedPointerEvent) => {
-    console.log(event)
+    console.log(event);
     setIsActive(!isActive);
-  }
+  };
   return (
     <pixiContainer>
       {/*Render all image layers*/}
@@ -50,6 +50,7 @@ export const Stage = ({ files }: EditorProps) => {
           <pixiSprite
             texture={layer.texture}
           />
+          <pixiText  text='SKEW IS COOL'/>
         </pixiContainer>
       ))}
     </pixiContainer>

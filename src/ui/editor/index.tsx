@@ -1,5 +1,5 @@
 import { Application, extend } from "@pixi/react";
-import { Container, Graphics, Sprite } from "pixi.js";
+import { Container, Graphics, Sprite, Text } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 
 import { useRef } from "react";
@@ -11,6 +11,7 @@ extend({
   Graphics,
   Sprite,
   Viewport,
+  Text,
 });
 
 export default function Editor({ files }: EditorProps) {

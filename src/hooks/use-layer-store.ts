@@ -1,6 +1,6 @@
-import { Assets, Texture } from "pixi.js";
+import { Application, Assets, Texture } from "pixi.js";
 import { create } from "zustand/react";
-import { readFileAsDataURL } from "./utils.ts";
+import { readFileAsDataURL } from "../ui/editor/utils.ts";
 
 export interface ImageLayer {
   id: string;
@@ -16,7 +16,7 @@ interface LayerState {
   addLayer: (
     file: File,
     index: number,
-    appDimensions: { width: number; height: number },
+    app: Application,
   ) => Promise<void>;
   updateLayerPosition: (id: string, x: number, y: number) => void;
   updateLayerZIndex: (id: string, zIndex: number) => void;
@@ -26,12 +26,12 @@ interface LayerState {
 // Create the store with type safety
 export const useLayerStore = create<LayerState>((set, get) => ({
   layers: [],
-  addLayer: async (file, index, appDimensions) => {
+  addLayer: async (file, index, app) => {
     try {
       const url = await readFileAsDataURL(file);
       const texture = await Assets.load(url);
-      const x = appDimensions.width / 2 + (index * 30); // Center of screen with offset
-      const y = appDimensions.height / 2 + (index * 30);
+      const x = app.screen.width / 2 + (index * 30); // Center of screen with offset
+      const y = app.screen.height / 2 + (index * 30);
 
       const newLayer: ImageLayer = {
         id: `layer-${Date.now()}-${index}`,
