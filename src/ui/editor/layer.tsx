@@ -19,13 +19,61 @@ export function Layer({ children, x, y, ...rest }: LayerProps) {
     setIsActive(!isActive);
   };
 
+  function onDragStart(event) {
+    if (!this.dragging) {
+      this.data = event.data;
+      this.oldGroup = this.parentGroup;
+      this.parentGroup = dragGroup;
+      this.dragging = true;
+
+      this.scale.x *= 1.1;
+      this.scale.y *= 1.1;
+      this.dragPoint = event.data.getLocalPosition(this.parent);
+      this.dragPoint.x -= this.x;
+      this.dragPoint.y -= this.y;
+    }
+  }
+
+  function onDragEnd() {
+    if (this.dragging) {
+      this.dragging = false;
+      this.parentGroup = this.oldGroup;
+      this.scale.x /= 1.1;
+      this.scale.y /= 1.1;
+      // set the interaction data to null
+      this.data = null;
+    }
+  }
+
+  function onDragMove() {
+    if (this.dragging) {
+      const newPosition = this.data.getLocalPosition(this.parent);
+      this.x = newPosition.x - this.dragPoint.x;
+      this.y = newPosition.y - this.dragPoint.y;
+    }
+  }
+
+  //   obj.on('mousedown', onDragStart)
+  //         .on('touchstart', onDragStart)
+  //         .on('mouseup', onDragEnd)
+  //         .on('mouseupoutside', onDragEnd)
+  //         .on('touchend', onDragEnd)
+  //         .on('touchendoutside', onDragEnd)
+  //         .on('mousemove', onDragMove)
+  //         .on('touchmove', onDragMove);
+
   return (
     <pixiContainer
       x={x}
       y={y}
       anchor={0.5}
+      interactive={true}
       eventMode={"static"}
       onClick={handleClick}
+      onPointerDown={onDragStart}
+      onPointerUp={onDragEnd}
+      onPointerUpOutside={onDragEnd}
+      onPointerMove={onDragMove}
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}
       scale={isHovered ? 1 : .06}
