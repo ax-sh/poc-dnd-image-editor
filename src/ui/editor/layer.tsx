@@ -19,16 +19,16 @@ export function Layer({ children, x, y, ...rest }: LayerProps) {
     setIsActive(!isActive);
   };
 
-  function onDragStart(event) {
+  function onDragStart(event: FederatedPointerEvent) {
     if (!this.dragging) {
       this.data = event.data;
       this.oldGroup = this.parentGroup;
-      this.parentGroup = dragGroup;
+      // this.parentGroup = dragGroup;
       this.dragging = true;
 
       this.scale.x *= 1.1;
       this.scale.y *= 1.1;
-      this.dragPoint = event.data.getLocalPosition(this.parent);
+      this.dragPoint = event.getLocalPosition(this.parent);
       this.dragPoint.x -= this.x;
       this.dragPoint.y -= this.y;
     }
