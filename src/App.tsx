@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { DropFileOverlay } from "./drop-file-overlay.tsx";
+import { DropFileOverlay } from "./ui/drop-file-overlay.tsx";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
