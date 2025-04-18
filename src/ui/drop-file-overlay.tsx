@@ -2,7 +2,8 @@ import { useDropzone } from "react-dropzone";
 import type { DropEvent, DropzoneOptions, FileRejection } from "react-dropzone";
 
 import { Upload } from "lucide-react";
-import { ComponentProps, PropsWithChildren, useCallback } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
+import React from "react";
 import clsx from "clsx";
 
 function UploadHintCard({ className }: ComponentProps<"div">) {
@@ -31,15 +32,17 @@ type OnDropFunction = <T extends File>(
   event: DropEvent,
 ) => void;
 
-type DropFileOverlayProps =
-  & Pick<DropzoneOptions, "accept" | "maxFiles" | "maxSize">
-  & {
-    /** Function called when files are dropped */
-    onFileDrop: OnDropFunction;
-    disableClickOpenFileDialog: boolean;
-  };
+interface DropFileOverlayProps extends
+  Pick<
+    DropzoneOptions,
+    "accept" | "maxFiles" | "maxSize" | "preventDropOnDocument" | "disabled"
+  > {
+  /** Function called when files are dropped */
+  onFileDrop: OnDropFunction;
+  disableClickOpenFileDialog: boolean;
+}
 
-export function DropFileOverlay({
+function DropFileOverlayComponent({
   onFileDrop,
   accept,
   maxSize,
@@ -47,9 +50,8 @@ export function DropFileOverlay({
   disableClickOpenFileDialog,
   children,
 }: PropsWithChildren<DropFileOverlayProps>) {
-  const onDrop = useCallback(onFileDrop, [onFileDrop]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
+    onDrop: onFileDrop,
     accept,
     maxSize,
     maxFiles,
@@ -73,3 +75,5 @@ export function DropFileOverlay({
     </>
   );
 }
+
+export const DropFileOverlay = React.memo(DropFileOverlayComponent);
