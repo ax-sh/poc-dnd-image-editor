@@ -1,9 +1,10 @@
 import { type PropsWithChildren, useState } from "react";
 import type { FederatedPointerEvent } from "pixi.js";
 import { PixiContainer } from "../../types.ts";
+import React from "react";
 
 type LayerProps = PropsWithChildren<Pick<PixiContainer, "x" | "y">>;
-export function Layer({ children, x, y, ...rest }: LayerProps) {
+function LayerComponent({ children, x, y, ...rest }: LayerProps) {
   const [isHovered, setIsHover] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const handlePointerOver = (event: FederatedPointerEvent) => {
@@ -83,3 +84,5 @@ export function Layer({ children, x, y, ...rest }: LayerProps) {
     </pixiContainer>
   );
 }
+
+export const Layer = React.memo(LayerComponent);
