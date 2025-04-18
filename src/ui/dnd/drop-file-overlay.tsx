@@ -59,20 +59,18 @@ function DropFileOverlayComponent({
   });
   const showHint = !disableClickOpenFileDialog || isDragActive;
   return (
-    <>
-      <section
-        {...getRootProps()}
-        className={clsx(
-          "absolute inset-0",
-          !disableClickOpenFileDialog &&
-            "cursor-pointer",
-        )}
-      >
-        <input {...getInputProps()} data-testid="dnd-file-input" />
-        {showHint && <UploadHintCard />}
-      </section>
+    <section
+      {...getRootProps()}
+      className={clsx(
+        "absolute inset-0",
+        !disableClickOpenFileDialog &&
+          "cursor-pointer",
+      )}
+    >
+      <input {...getInputProps()} data-testid="dnd-file-input" />
+      {showHint && <UploadHintCard />}
       {children}
-    </>
+    </section>
   );
 }
 
